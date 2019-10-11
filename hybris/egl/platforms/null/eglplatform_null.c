@@ -10,7 +10,8 @@
 #include <hybris/gralloc/gralloc.h>
 
 #pragma GCC visibility push(hidden)
-HYBRIS_LIBRARY_INITIALIZE(nullui, "/system/lib/libui.so");
+//HYBRIS_LIBRARY_INITIALIZE(nullui, "/system/lib/libui.so");
+HYBRIS_LIBRARY_INITIALIZE(nullui, "/system/lib64/libAwindow.so");
 #pragma GCC visibility pop
 
 static HYBRIS_IMPLEMENT_FUNCTION0(nullui, EGLNativeWindowType, android_createDisplaySurface);
@@ -35,11 +36,7 @@ static EGLNativeWindowType nullws_CreateWindow(EGLNativeWindowType win, struct _
 {
 	if (win == 0)
 	{
-#if (ANDROID_VERSION_MAJOR <= 7)
 		return android_createDisplaySurface();
-#else
-		return win;
-#endif
 	}
 	else
 		return win;
